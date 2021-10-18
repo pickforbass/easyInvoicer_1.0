@@ -18,3 +18,7 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+// MYSQL structure
+db_model.mwb
+db_model.mwb.bak
