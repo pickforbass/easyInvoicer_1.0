@@ -22,3 +22,8 @@
 // MYSQL structure
 db_model.mwb
 db_model.mwb.bak
+
+//ENV access
+
+.env
+.env.test
