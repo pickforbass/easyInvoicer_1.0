@@ -7,6 +7,24 @@
 {% endblock %}
 
 {% block body %}
+
+<div id="links_container">
+    <div id="menu_caller">
+        <h3>
+            +
+        </h3>
+    </div>
+
+    <div>
+        <ul>
+            <li>Voir les clients</li>
+            <li>Voir les factures</li>
+            <li>Voir les relances</li>
+            <li>Tâches</li>
+        </ul>
+    </div>
+</div>
+
 <div class='container'>
     <ul>
         <li class='card'>
@@ -27,4 +45,9 @@
     </ul>
 
 </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src={{ asset('assets/scripts/dashboard.js') }} defer>
 {% endblock %}
