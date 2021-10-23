@@ -1,0 +1,25 @@
+ul {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    flex-direction: row;
+}
+
+li {
+    list-style-type: none;
+    display: inline-block;
+    width: 21vh;
+    height: 21vh;
+    margin: 1.5rem;
+    text-align: center;
+    border: 1px solid #cce;
+    border-radius: 0.3rem;
+    box-shadow: inset #cce -1px 0px 3px 0px;
+}
+
+li a {
+    display: block;
+    position: relative;
+    top: 39%;
+    bottom: 39%;
+}

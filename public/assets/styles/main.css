@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     /* padding: 0; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(41, 42, 45);
 }
 
 header {
@@ -40,5 +41,9 @@ input, input:active, input:focus, input:focus-within, input:focus-visible, input
     height: 2em;
 }
 
-
+a {
+    color: rgba(234, 79, 4, 0.84);
+    font-weight: bold;
+    text-decoration: none;
+}
 
