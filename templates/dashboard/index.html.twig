@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/styles/dashboard.css') }}"
+{% endblock %}
+
+{% block body %}
+<div class='container'>
+    <list>
+        <ul class='card'>
+            <a href={{ path('client_index')}}>Clients</a>
+        </ul>
+
+        <ul class='card'>
+            <a href={{ path('client_index')}}>Factures</a>
+        </ul>
+
+        <ul class='card'>
+            <a href={{ path('client_index')}}>Relances</a>
+        </ul>
+
+        <ul class='card'>
+            <a href={{ path('client_index')}}>Tâches</a>
+        </ul>
+    </list>
+
+</div>
+{% endblock %}
