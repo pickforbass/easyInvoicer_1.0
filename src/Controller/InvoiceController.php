@@ -26,7 +26,7 @@ class InvoiceController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="invoice_new", methods={"GET","POST"})
+     * @Route("/new_invoice", name="invoice_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {

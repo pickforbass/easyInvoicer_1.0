@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/clients", name="client_index", methods={"GET"})
+     * @Route("/", name="client_index", methods={"GET"})
      */
     public function index(ClientRepository $clientRepository): Response
     {
@@ -26,7 +26,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="client_new", methods={"GET","POST"})
+     * @Route("/new_client", name="client_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -91,4 +91,5 @@ class ClientController extends AbstractController
 
         return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Client
      * @ORM\Column(type="string", length=40)
      */
     private $mail;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Invoice::class, mappedBy="client")
+     */
+    private $invoices;
+
+    public function __construct()
+    {
+        $this->invoices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,47 @@ class Client
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Invoice[]
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+
+    /**
+     * @return string
+     */
+
+    public function addInvoice(Invoice $invoice): self
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices[] = $invoice;
+            $invoice->setClient($this);
+        }
+
+        return $this;
+    }
+
+
+    public function __toString(): ?string
+    {
+        return $this->name;
+    }
+
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->removeElement($invoice)) {
+            // set the owning side to null (unless already changed)
+            if ($invoice->getClient() === $this) {
+                $invoice->setClient(null);
+            }
+        }
 
         return $this;
     }

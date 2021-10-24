@@ -26,7 +26,7 @@ class WorkController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="work_new", methods={"GET","POST"})
+     * @Route("/new_work", name="work_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {

@@ -27,6 +27,12 @@ class Invoice
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="invoices")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class Invoice
     public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
