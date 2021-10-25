@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Invoice;
 use App\Form\InvoiceType;
 use App\Repository\InvoiceRepository;
+use App\Repository\WorkRepository;
 use Doctrine\Common\Collections\Expr\Value;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,11 +31,16 @@ class InvoiceController extends AbstractController
     /**
      * @Route("/new", name="invoice_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request , WorkRepository $workRepository): Response
     {
         $invoice = new Invoice();
         $form = $this->createForm(InvoiceType::class, $invoice);
         $form->handleRequest($request);
+
+        $repo = $workRepository->findAll();
+        // $workList = $repo->findAll();
+
+        dd($repo);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Set number
