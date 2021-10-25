@@ -6,9 +6,13 @@ table {
 }
 
 thead {
-    background-color: #cde;
+    background-color: #bcd;
 }
 
 th {
     min-width: 15vh;
+}
+
+tbody tr:nth-child(even){
+    background-color: #def;
 }

@@ -33,6 +33,11 @@ class Invoice
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $paid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class Invoice
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getPaid(): ?bool
+    {
+        return $this->paid;
+    }
+
+    public function setPaid(bool $paid): self
+    {
+        $this->paid = $paid;
 
         return $this;
     }
