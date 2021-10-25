@@ -37,8 +37,12 @@ class InvoiceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Set number
-            // $number = $form['date']['year'];
-            // $form['number'] = $number;
+            $date = $invoice->getDate();
+            $date = date_format($date, 'Y');
+            $number = $date.'/'.'000';
+            $invoice->setNumber($number);
+            $invoice->setPaid(false);
+            
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
