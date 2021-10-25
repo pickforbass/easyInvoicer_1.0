@@ -15,7 +15,7 @@ class InvoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('number', HiddenType::class)
+            ->add('number', HiddenType::class) //set compound to true
             ->add('date')
             ->add('client')
         ;

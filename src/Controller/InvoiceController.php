@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Invoice;
 use App\Form\InvoiceType;
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class InvoiceController extends AbstractController
     }
 
     /**
-     * @Route("/new_invoice", name="invoice_new", methods={"GET","POST"})
+     * @Route("/new", name="invoice_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -35,6 +36,9 @@ class InvoiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $number = $form['date']['year'];
+            $form['number'] = $number;
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
             $entityManager->flush();
@@ -63,7 +67,7 @@ class InvoiceController extends AbstractController
      */
     public function edit(Request $request, Invoice $invoice): Response
     {
-        $form = $this->createForm(InvoiceType::class, $invoice);
+        $form = $this->createForm(Invoice1Type::class, $invoice);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

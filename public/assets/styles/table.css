@@ -1,0 +1,14 @@
+table {
+    max-width: 900px;
+    margin: 1em auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+thead {
+    background-color: #cde;
+}
+
+th {
+    min-width: 15vh;
+}
