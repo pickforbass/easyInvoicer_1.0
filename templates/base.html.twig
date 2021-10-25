@@ -19,8 +19,9 @@
                 </h1>
             </div>
         </header>
-        {% block body %}{% endblock %}
-
+        <section>
+            {% block body %}{% endblock %}
+        </section>
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}

@@ -40,7 +40,7 @@ li {
 }
 
 
-#links_container {
+menu {
     z-index: 1;
     width: 220px;
     min-height: 66vh;
@@ -54,7 +54,7 @@ li {
 }
 
 
-#links_container ul {
+menu ul {
     padding-left: 0;
 
 }

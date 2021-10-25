@@ -1,7 +1,6 @@
 // Variables
-const menu = document.getElementById('links_container');
+const menu = document.getElementById('menu');
 const menuButton = document.getElementById('menu_caller');
-
 
 // Side menu animation
 
