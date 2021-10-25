@@ -1,24 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Work index{% endblock %}
+{% block title %}Tâches{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel=stylesheet href='{{asset('assets/styles/table.css')}}'>
+{% endblock %}
+
 
 {% block body %}
-    <h1>Work index</h1>
+    <h1>Liste des tâches</h1>
+
+    <a class="to-new" href="{{ path('work_new') }}">Nouvelle tâche</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Basic_fee</th>
-                <th>Payable</th>
-                <th>actions</th>
+                <th>Tâche</th>
+                <th>Taux horaire</th>
+                <th>Facturable</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for work in works %}
             <tr>
-                <td>{{ work.id }}</td>
                 <td>{{ work.title }}</td>
                 <td>{{ work.basicFee }}</td>
                 <td>{{ work.payable ? 'Yes' : 'No' }}</td>
@@ -35,5 +41,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('work_new') }}">Create new</a>
 {% endblock %}
