@@ -9,6 +9,8 @@
 {% block body %}
     <h1>Vos factures</h1>
 
+    <a class="to-new" href="{{ path('invoice_new') }}">Nouvelle facture</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -36,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('invoice_new') }}">Create new</a>
 {% endblock %}
