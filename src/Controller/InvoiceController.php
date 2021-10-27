@@ -31,7 +31,7 @@ class InvoiceController extends AbstractController
     /**
      * @Route("/new", name="invoice_new", methods={"GET","POST"})
      */
-    public function new(Request $request , WorkRepository $workRepository): Response
+    public function new(Request $request , WorkRepository $workRepository, InvoiceRepository $invoiceRepository): Response
     {
         $invoice = new Invoice();
         $form = $this->createForm(InvoiceType::class, $invoice);
@@ -40,13 +40,16 @@ class InvoiceController extends AbstractController
         $repo = $workRepository->findAll();
         // $workList = $repo->findAll();
 
-        dd($repo);
-
         if ($form->isSubmitted() && $form->isValid()) {
             //Set number
             $date = $invoice->getDate();
             $date = date_format($date, 'Y');
+            $counter = $invoiceRepository->countInvoice($date);
+
+            dd($counter);
             $number = $date.'/'.'000';
+
+
             $invoice->setNumber($number);
             $invoice->setPaid(false);
             

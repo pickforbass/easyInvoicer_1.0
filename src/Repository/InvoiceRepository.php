@@ -36,15 +36,15 @@ class InvoiceRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Invoice
+    
+    public function countInvoice($value): ?Invoice
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('count(invoice.number)')
+            ->where('invoice.number CONTAINS $value')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getSingleScalarResult()
         ;
     }
-    */
+    
 }
