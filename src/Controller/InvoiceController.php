@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * @Route("/invoice")
@@ -44,10 +45,25 @@ class InvoiceController extends AbstractController
             //Set number
             $date = $invoice->getDate();
             $date = date_format($date, 'Y');
-            $counter = $invoiceRepository->countInvoice($date);
+            $counter = $invoiceRepository->countInvoice($date)+1;
 
-            dd($counter);
-            $number = $date.'/'.'000';
+            dd(strlen($counter));
+
+            switch(strlen($counter)+1) {
+                case 1:
+                    $counter = '00'.$counter;
+                    break;
+                case 2:
+                    $counter = '0'.$counter;
+                    break;
+                case 3: 
+                    $counter = $counter;
+                    break;
+            }
+                
+            $number = $date.'/'.$counter;
+
+            
 
 
             $invoice->setNumber($number);
