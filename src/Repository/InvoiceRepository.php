@@ -37,11 +37,11 @@ class InvoiceRepository extends ServiceEntityRepository
     */
 
     
-    public function countInvoice($value): ?Invoice
+    public function countInvoice($value)
     {
-        return $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('invoice')
             ->select('count(invoice.number)')
-            ->where('invoice.number CONTAINS $value')
+            ->where("invoice.number = $value")
             ->getQuery()
             ->getSingleScalarResult()
         ;
