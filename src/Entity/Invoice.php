@@ -38,6 +38,11 @@ class Invoice
      */
     private $paid;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $designation = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Invoice
     public function setPaid(bool $paid): self
     {
         $this->paid = $paid;
+
+        return $this;
+    }
+
+    public function getDesignation(): ?array
+    {
+        return $this->designation;
+    }
+
+    public function setDesignation(?array $designation): self
+    {
+        $this->designation = $designation;
 
         return $this;
     }

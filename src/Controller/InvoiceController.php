@@ -47,8 +47,6 @@ class InvoiceController extends AbstractController
             $date = date_format($date, 'Y');
             $counter = $invoiceRepository->countInvoice($date)+1;
 
-            dd(strlen($counter));
-
             switch(strlen($counter)+1) {
                 case 1:
                     $counter = '00'.$counter;
@@ -60,16 +58,15 @@ class InvoiceController extends AbstractController
                     $counter = $counter;
                     break;
             }
-                
             $number = $date.'/'.$counter;
-
-            
-
-
             $invoice->setNumber($number);
+
+            // Set designations
+            
+
+
             $invoice->setPaid(false);
-            
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
             $entityManager->flush();
