@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,9 +41,14 @@ class Invoice
     private $paid;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="invoice")
      */
-    private $designation = [];
+    private $designations;
+
+    public function __construct()
+    {
+        $this->designations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -96,15 +103,34 @@ class Invoice
         return $this;
     }
 
-    public function getDesignation(): ?array
+    /**
+     * @return Collection|Designation[]
+     */
+    public function getDesignations(): Collection
     {
-        return $this->designation;
+        return $this->designations;
     }
 
-    public function setDesignation(?array $designation): self
+    public function addDesignation(Designation $designation): self
     {
-        $this->designation = $designation;
+        if (!$this->designations->contains($designation)) {
+            $this->designations[] = $designation;
+            $designation->setInvoice($this);
+        }
 
         return $this;
     }
+
+    public function removeDesignation(Designation $designation): self
+    {
+        if ($this->designations->removeElement($designation)) {
+            // set the owning side to null (unless already changed)
+            if ($designation->getInvoice() === $this) {
+                $designation->setInvoice(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
