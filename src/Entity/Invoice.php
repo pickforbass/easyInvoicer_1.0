@@ -41,7 +41,7 @@ class Invoice
     private $paid;
 
     /**
-     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="invoice")
+     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="designations")
      */
     private $designations;
 
