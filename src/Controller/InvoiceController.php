@@ -38,9 +38,6 @@ class InvoiceController extends AbstractController
         $form = $this->createForm(InvoiceType::class, $invoice);
         $form->handleRequest($request);
 
-        $repo = $workRepository->findAll();
-        // $workList = $repo->findAll();
-
         if ($form->isSubmitted() && $form->isValid()) {
             //Set number
             $date = $invoice->getDate();

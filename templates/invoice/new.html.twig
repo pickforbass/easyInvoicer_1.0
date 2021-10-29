@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Invoice{% endblock %}
+{% block title %}Nouvelle facture{% endblock %}
 
 {% block body %}
-    <h1>Create new Invoice</h1>
+    <h1> Nouvelle facture </h1>
 
     {{ include('invoice/_form.html.twig') }}
 
+    <button id='add-task'> Ajouter une tâche </button>
+
     <a href="{{ path('invoice_index') }}">back to list</a>
 {% endblock %}
+
+{% block javascripts %}
+    <script src='{{ asset('assets/scripts/invoice.js') }}' defer></script>
+{% endblock%}
