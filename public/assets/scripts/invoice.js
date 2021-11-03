@@ -1,7 +1,10 @@
 const addTask = document.getElementById('add-task');
-const prototype = document.getElementById('invoice_designations').getAttribute('data-prototype');
+const prototype = document.getElementById('invoice-designations-container').getAttribute('data-prototype');
 const chars = '__name__';
-let count = 1;
+let count = prototype.dataset('data-index');
+
+
+console.log(prototype)
 
 addTask.addEventListener('click', function () {
     let newPrototype = prototype;
@@ -12,5 +15,5 @@ addTask.addEventListener('click', function () {
         
     count++;
     
-    //TODO : insert newPrototype on table
+    //TODO : insert newPrototype on table 
 })
