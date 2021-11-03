@@ -11,5 +11,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src='{{ asset('assets/scripts/invoice.js') }}'></script>
+    {{ encore_entry_script_tags('invoice') }}
 {% endblock%}

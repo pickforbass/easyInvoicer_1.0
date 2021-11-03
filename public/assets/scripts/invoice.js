@@ -1,19 +1,27 @@
 const addTask = document.getElementById('add-task');
-const prototype = document.getElementById('invoice-designations-container').getAttribute('data-prototype');
+const prototypeContainer = document.getElementById('invoice-designations-container');
 const chars = '__name__';
-let count = prototype.dataset('data-index');
+let prototype = prototypeContainer.dataset.prototype;
+let index = prototypeContainer.dataset.index;
 
 
-console.log(prototype)
+// Generate new designation
 
-addTask.addEventListener('click', function () {
-    let newPrototype = prototype;
+function newDesignationForm () {
+    let line = prototype;
 
-    while(newPrototype.indexOf(chars) != -1) {
-        newPrototype = newPrototype.replace(chars, count);
+    while(line.indexOf(chars) != -1) {
+        line = line.replace(chars, index);
     }
         
-    count++;
-    
+    prototypeContainer.innerHTML += line;
+    index++;
+    console.log(index);
     //TODO : insert newPrototype on table 
-})
+}
+
+newDesignationForm();
+
+addTask.onclick = newDesignationForm;
+
+
