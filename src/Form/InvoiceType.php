@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Invoice;
 use App\Entity\Work;
 use App\Repository\WorkRepository;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,10 +21,12 @@ class InvoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('number', HiddenType::class)
-            ->add('date')
-            ->add('paid', HiddenType::class, [
-                'data' => false
+            ->add(  'number', HiddenType::class)
+            ->add(  'date', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add(  'paid', HiddenType::class, [
+                    'data' => false
             ])
             ->add('client')
             ->add(  'designations', CollectionType::class, [

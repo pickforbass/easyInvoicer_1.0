@@ -39,6 +39,7 @@ class InvoiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($invoice);
             //Set number
             $date = $invoice->getDate();
             $date = date_format($date, 'Y');
