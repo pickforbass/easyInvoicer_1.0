@@ -11,5 +11,6 @@ addTask.addEventListener('click', function () {
     }
         
     count++;
-    console.log(newPrototype);
+    
+    //TODO : insert newPrototype on table
 })

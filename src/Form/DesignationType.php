@@ -20,7 +20,8 @@ class DesignationType extends AbstractType
         $builder
             ->add('title', EntityType::class, [
                 'class'=> Work::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
+                'label' => false
             ])
             ->add('amount')
             ->add('invoice')

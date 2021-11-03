@@ -42,20 +42,11 @@ class InvoiceController extends AbstractController
             //Set number
             $date = $invoice->getDate();
             $date = date_format($date, 'Y');
-            $counter = $invoiceRepository->countInvoice($date)+1;
+            $number = $invoiceRepository->countInvoice($date)+1;
 
-            switch(strlen($counter)+1) {
-                case 1:
-                    $counter = '00'.$counter;
-                    break;
-                case 2:
-                    $counter = '0'.$counter;
-                    break;
-                case 3: 
-                    $counter = $counter;
-                    break;
-            }
-            $number = $date.'/'.$counter;
+            $number = str_pad($number, 3, '0', STR_PAD_LEFT);
+
+            $number = $date.'/'.$number;
             $invoice->setNumber($number);
 
             // Set designations

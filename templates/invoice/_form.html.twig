@@ -1,5 +1,16 @@
 {{ form_start(form) }}
-    {{ form_row (form.designations)}}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {# {% use 'other_forms/_designation.html.twig' %} #}
+    {{ form_start(form)}}
+
+    <div data-index = "1" data-prototype = "{{ form_widget(form.designations.vars.prototype) | e('html') }}">
+    
+    </div>
+
+    <button type="button" id='add-task' data-collection-holder-class = 'designations'>Ajouter une tâche</button>
+
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+
+    {{ form_end(form)}}
+
 {{ form_end(form) }}
