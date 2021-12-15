@@ -28,7 +28,7 @@ class Designation
     private $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Invoice::class, inversedBy="designations")
+     * @ORM\ManyToOne(targetEntity=Invoice::class, inversedBy="designations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $invoice;
@@ -72,5 +72,10 @@ class Designation
         $this->invoice = $invoice;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

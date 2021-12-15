@@ -30,12 +30,14 @@ class InvoiceType extends AbstractType
             ])
             ->add('client')
             ->add(  'designations', CollectionType::class, [
-                    'entry_type' => DesignationType::class,
+                    // 'entry_type' => DesignationType::class,
                     'allow_add' => true,
                     'prototype' => true,
+                    'by_reference' => false,
                     'entry_options' => [
                     'label' => false
-                ]
+                    ],
+                    'by_reference' => false
             ])
         ;
     }

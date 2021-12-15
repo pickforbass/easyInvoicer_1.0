@@ -1,0 +1,110 @@
+Index: src/Entity/Invoice.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entity/Invoice.php b/src/Entity/Invoice.php
+--- a/src/Entity/Invoice.php	(revision 19a122666268140f8fb106f0a31d243ccd4afca1)
++++ b/src/Entity/Invoice.php	(date 1639543381766)
+@@ -41,7 +41,7 @@
+     private $paid;
+ 
+     /**
+-     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="designations")
++     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="designations", cascade={"persist"})
+      */
+     private $designations;
+ 
+@@ -111,16 +111,23 @@
+         return $this->designations;
+     }
+ 
+-    public function addDesignation(Designation $designation): self
++
++    public function addDesignation(array $designation): self
+     {
+-        if (!$this->designations->contains($designation)) {
+-            $this->designations[] = $designation;
+-            $designation->setInvoice($this);
++        $ds = (new Designation())
++            ->setTitle($designation['title']->getTitle())
++            ->setAmount($designation['amount'])
++            ->setInvoice($this)
++        ;
++
++        if (!$this->designations->contains($ds)) {
++            $this->designations[] = $ds;
+         }
+ 
+         return $this;
+     }
+ 
++
+     public function removeDesignation(Designation $designation): self
+     {
+         if ($this->designations->removeElement($designation)) {
+Index: src/Controller/InvoiceController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/InvoiceController.php b/src/Controller/InvoiceController.php
+--- a/src/Controller/InvoiceController.php	(revision 19a122666268140f8fb106f0a31d243ccd4afca1)
++++ b/src/Controller/InvoiceController.php	(date 1639543476660)
+@@ -2,6 +2,7 @@
+ 
+ namespace App\Controller;
+ 
++use App\Entity\Designation;
+ use App\Entity\Invoice;
+ use App\Form\InvoiceType;
+ use App\Repository\InvoiceRepository;
+@@ -39,7 +40,6 @@
+         $form->handleRequest($request);
+ 
+         if ($form->isSubmitted() && $form->isValid()) {
+-            // dd($invoice);
+             //Set number
+             $date = $invoice->getDate();
+             $date = date_format($date, 'Y');
+@@ -51,11 +51,8 @@
+             $invoice->setNumber($number);
+ 
+             // Set designations
+-            
+ 
+-
+             $invoice->setPaid(false);
+-
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($invoice);
+             $entityManager->flush();
+@@ -84,7 +81,7 @@
+      */
+     public function edit(Request $request, Invoice $invoice): Response
+     {
+-        $form = $this->createForm(Invoice1Type::class, $invoice);
++        $form = $this->createForm(InvoiceType::class, $invoice);
+         $form->handleRequest($request);
+ 
+         if ($form->isSubmitted() && $form->isValid()) {
+Index: src/Form/InvoiceType.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Form/InvoiceType.php b/src/Form/InvoiceType.php
+--- a/src/Form/InvoiceType.php	(revision 19a122666268140f8fb106f0a31d243ccd4afca1)
++++ b/src/Form/InvoiceType.php	(date 1639543381646)
+@@ -35,7 +35,9 @@
+                     'prototype' => true,
+                     'entry_options' => [
+                     'label' => false
+-                ]
++                ],
++                'by_reference' => false
++
+             ])
+         ;
+     }
+     

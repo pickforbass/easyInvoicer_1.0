@@ -41,7 +41,7 @@ class Invoice
     private $paid;
 
     /**
-     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="designations")
+     * @ORM\OneToMany(targetEntity=Designation::class, mappedBy="designations", cascade={"persist"})
      */
     private $designations;
 
@@ -111,15 +111,22 @@ class Invoice
         return $this->designations;
     }
 
-    public function addDesignation(Designation $designation): self
+
+    public function addDesignation(array $designation): self
     {
-        if (!$this->designations->contains($designation)) {
-            $this->designations[] = $designation;
-            $designation->setInvoice($this);
+        $ds = (new Designation())
+            ->setTitle($designation['title']->getTitle())
+            ->setAmount($designation['amount'])
+            ->setInvoice($this)
+        ;
+
+        if (!$this->designations->contains($ds)) {
+            $this->designations[] = $ds;
         }
 
         return $this;
     }
+
 
     public function removeDesignation(Designation $designation): self
     {

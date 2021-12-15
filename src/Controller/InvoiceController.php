@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Designation;
 use App\Entity\Invoice;
 use App\Form\InvoiceType;
 use App\Repository\InvoiceRepository;
@@ -38,8 +39,8 @@ class InvoiceController extends AbstractController
         $form = $this->createForm(InvoiceType::class, $invoice);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($invoice);
             //Set number
             $date = $invoice->getDate();
             $date = date_format($date, 'Y');
@@ -53,9 +54,8 @@ class InvoiceController extends AbstractController
             // Set designations
             
 
-
             $invoice->setPaid(false);
-
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
             $entityManager->flush();
@@ -84,7 +84,7 @@ class InvoiceController extends AbstractController
      */
     public function edit(Request $request, Invoice $invoice): Response
     {
-        $form = $this->createForm(Invoice1Type::class, $invoice);
+        $form = $this->createForm(InvoiceType::class, $invoice);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

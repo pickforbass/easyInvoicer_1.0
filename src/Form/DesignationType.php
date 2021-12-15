@@ -8,6 +8,7 @@ use App\Repository\WorkRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,13 +19,13 @@ class DesignationType extends AbstractType
     {
         
         $builder
-            ->add('title', EntityType::class, [
-                'class'=> Work::class,
-                'choice_label' => 'title',
-                'label' => false
+            ->add(  'title', EntityType::class, [
+                    'class'=> Work::class,
+                    'choice_label' => 'title',
+                    'label' => false
             ])
-            ->add('amount')
-            ->add('invoice')
+            ->add(  'amount')
+            ->add(  'invoice', HiddenType::class)
         ;
     }
 

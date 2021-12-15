@@ -1,0 +1,12 @@
+diff a/src/Form/InvoiceType.php b/src/Form/InvoiceType.php	(rejected hunks)
+@@ -35,7 +35,9 @@
+                     'prototype' => true,
+                     'entry_options' => [
+                     'label' => false
+-                ]
++                ],
++                'by_reference' => false
++
+             ])
+         ;
+     }
