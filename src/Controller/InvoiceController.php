@@ -39,7 +39,6 @@ class InvoiceController extends AbstractController
         $form = $this->createForm(InvoiceType::class, $invoice);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
             //Set number
             $date = $invoice->getDate();
@@ -52,10 +51,8 @@ class InvoiceController extends AbstractController
             $invoice->setNumber($number);
 
             // Set designations
-            
 
             $invoice->setPaid(false);
-            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
             $entityManager->flush();
