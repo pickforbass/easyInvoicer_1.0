@@ -1,23 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@200;400;700&display=swap');
 
+:root {
+    --rich-black: rgb(23,29,44);
+    --tropical-rain: rgb(27,116,98);
+    --vermillion: rgb(212,66,33);
+    --honeydew: rgb(232,247,222);
+}
+
 html, body {
     margin: 0;
     /* padding: 0; */
     font-family: 'Spartan', sans-serif;
-    color: rgb(41, 42, 45);
+    color: var(--rich-black);
 }
 
 header {
     min-height: 17vh;
     background-color: white;
-    box-shadow: inset #ddc 0px -2px 4px 0px;
+    box-shadow: inset #ddc 0px 2px 4px 0px;
     padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
 }
 
 h1 {
     margin-top: 0;
     padding-top: 15px;
-    text-align: center;
 }
 
 section {
